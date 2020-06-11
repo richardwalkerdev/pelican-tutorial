@@ -41,3 +41,5 @@ PLUGINS = ['tipue_search']
 
 # Year/Month Archive
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
+
+PORT = 8000

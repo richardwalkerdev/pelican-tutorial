@@ -32,12 +32,15 @@
                 {% if loop.index <= 3 %} 
                 <article class="uk-article">
                     <h1 class="uk-article-title"><a class="uk-link-reset" href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
+                    <p class="">Written on {{ article.locale_date }}. Posted in <a href="{{ SITEURL }}/category/{{ article.category|lower }}">{{ article.category }}</a> | <span data-uk-icon="icon: user"></span>
+                        {% for author in article.authors %}
+                        <a class="url fn" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                        {% endfor %}
+                    </p>
                     <figure>
                         {% if article.post_image %}<img src="{{ SITEURL }}/images/{{ article.post_image }}" data-src="{{ SITEURL }}/images/{{ article.post_image }}" width="790" height="296" alt="Alt text" class="uk-border-rounded" data-uk-img>{% endif %} 
                         {% if article.post_svg %}<img src="{{ SITEURL }}/{{ article.post_svg }}" width="400" height="200" alt="Alt text" class="uk-border-rounded uk-align-center">{% endif %} 
-                    </figure>
-                    <p class="uk-article-meta">Written by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a> on {{ article.locale_date }}. Posted in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></p>
-                    <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    </figure>                 
                     <p>{{ article.summary }}</p>
                     <div class="uk-grid-small uk-child-width-auto" uk-grid>
                         <div>
@@ -117,11 +120,15 @@
                 {% for article in articles_page.object_list %}
                 <article class="uk-article">
                     <h1 class="uk-article-title"><a class="uk-link-reset" href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
+                    <p class="">Written on {{ article.locale_date }}. Posted in <a href="{{ SITEURL }}/category/{{ article.category|lower }}">{{ article.category }}</a> | <span data-uk-icon="icon: user"></span>
+                        {% for author in article.authors %}
+                        <a class="url fn" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                        {% endfor %}
+                    </p>
                     <figure>
                         {% if article.post_image %}<img src="{{ SITEURL }}/images/{{ article.post_image }}" data-src="{{ SITEURL }}/images/{{ article.post_image }}" width="790" height="296" alt="Alt text" class="uk-border-rounded" data-uk-img>{% endif %} 
                         {% if article.post_svg %}<img src="{{ SITEURL }}/{{ article.post_svg }}" width="400" height="200" alt="Alt text" class="uk-border-rounded uk-align-center">{% endif %} 
                     </figure>
-                    <p class="uk-article-meta">Written by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a> on {{ article.locale_date }}. Posted in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></p>
                     <p>{{ article.summary }}</p>
                     <div class="uk-grid-small uk-child-width-auto" uk-grid>
                         <div>
