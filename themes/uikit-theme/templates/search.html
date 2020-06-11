@@ -1,0 +1,34 @@
+{% block content %}
+<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/jquery-3.5.1.min.js"></script>
+<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/tipuesearch.min.js"></script>
+<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/tipuesearch_set.js"></script>
+<script src="{{ SITEURL }}/tipuesearch_content.js"></script>
+<div class="uk-section-small">
+    <div class="uk-container">
+        {% block content_title %}
+        <h2 class="uk-heading-line uk-text-bold"><span>Search</span></h2>
+        {% endblock %}
+    </div>
+    <div class="uk-padding">
+        <div class="uk-container">
+            <form action="" method="get">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin">
+                        <input class="uk-input" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required type="search" placeholder="Search...">
+                        <input class="uk-button uk-button-primary uk-border-pill uk-margin" type="submit" value="Search">
+                    </div>
+                </fieldset>
+            </form>
+            <div id="tipue_search_content"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch({
+              'mode': 'json',
+              'contentLocation': 'tipuesearch_content.json'
+        });
+    });
+</script>
+{% endblock %}

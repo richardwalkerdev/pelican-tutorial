@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block html_lang %}{{ page.lang }}{% endblock %}
+{% block title %}{{ SITENAME }} - {{ page.title }}{%endblock%}
+{% block head %}
+{{ super() }}
+{% import 'translations.html' as translations with context %}
+{% if translations.entry_hreflang(page) %}
+{{ translations.entry_hreflang(page) }}
+{% endif %}
+{% endblock %}
+{% block content %}
+<!-- Search -->
+{% if page.title == "Search" %}
+{% include 'search.html' %}
+{% else %}
+<div class="uk-section-small">
+    <div class="uk-container uk-margin">
+        <h2 class="uk-text-primary uk-heading-line"><span>{{ page.title }}</span></h2>
+    </div>
+    {% import 'translations.html' as translations with context %}
+    {{ translations.translations_for(page) }}
+    <div class="uk-container">
+        {{ page.content }}
+        {% if page.modified %}
+        <p>
+            Last updated: {{ page.locale_modified }}
+        </p>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

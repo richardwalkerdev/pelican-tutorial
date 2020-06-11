@@ -1,0 +1,14 @@
+{% if DEFAULT_PAGINATION %}
+<div class="uk-container">
+    <p class="uk-text-center">
+        {% if articles_page.has_previous() %}
+        <a href="{{ SITEURL }}/{{ articles_previous_page.url }}"><span uk-icon="icon: chevron-left; ratio: 1"></span> Previous </a>
+        {% endif %}
+        &nbsp; (Page {{ articles_page.number }} / {{ articles_paginator.num_pages }})&nbsp;
+        {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{ articles_next_page.url }}">Next <span uk-icon="icon: chevron-right; ratio: 1"></span></a>
+        {% endif %}
+    </p>
+</div>
+{% endif %}
+

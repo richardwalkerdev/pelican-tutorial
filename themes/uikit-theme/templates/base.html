@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+    <head>
+        {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{% else %}{{ FEED_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_RSS_URL %}{{ FEED_RSS_URL }}{% else %}{{ FEED_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_ATOM_URL %}{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_ATOM.format(slug=category.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_RSS_URL %}{{ CATEGORY_FEED_RSS_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_RSS.format(slug=category.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_ATOM_URL %}{{ TAG_FEED_ATOM_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_ATOM.format(slug=tag.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_RSS_URL %}{{ TAG_FEED_RSS_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_RSS.format(slug=tag.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+        {% endif %}
+        {% endblock head %}
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/uikit.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/pygment.css">
+    </head>
+    <body id="index" class="home">
+        <!-- Header -->
+        <header id="banner" class="uk-background-secondary">       
+            <div class="uk-container-expand" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">    
+                <nav class="uk-background-secondary uk-light" uk-navbar>
+                    <div class="uk-navbar-left uk-margin-xlarge-left">
+                        <div class="uk-navbar-left">
+                            <div>
+                                <ul class="uk-navbar-nav">
+                                    <li><a class="uk-logo" href="{{ SITEURL }}/">{{ SITENAME }} <strong>{{ SITESUBTITLE }}</strong></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-navbar-right uk-margin-xlarge-right">
+                        <div class="uk-navbar-right">
+                            <div>
+                                <ul class="uk-navbar-nav">
+                                    {% for title, link in MENUITEMS %}
+                                    <li><a href="{{ link }}">{{ title }}</a></li>
+                                    {% endfor %}
+                                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                                    {% for cat, null in categories %}
+                                    <li{% if cat == category %} class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% if DISPLAY_PAGES_ON_MENU %}
+                                    {% for p in pages %}
+                                    {% if not p.title == "Search" %}
+                                    <li{% if p == page %} class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- /Header -->
+        {% block content %}
+        {% endblock %}
+        <div class="uk-section-xsmall uk-background-secondary">
+            <div class="uk-container uk-text-small">
+                <div>
+                    <p class="uk-text-small uk-text-center">&copy; {{ SITENAME }} 2020 - Powered by <a href="https://getpelican.com/">Pelican</a> | Built with <a href="http://getuikit.com" title="Visit UIkit 3 site" target="_blank" data-uk-tooltip><span data-uk-icon="uikit"></span></a> </p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/uikit.min.js"></script>
+        <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/uikit-icons.min.js"></script> 
+    </body>
+</html>
+
